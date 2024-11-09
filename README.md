@@ -21,5 +21,17 @@ A comprehensive tool for automating common troubleshooting and maintenance tasks
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/kali-fix-all-tool.git
-   cd kali-fix-all-tool
+   git clone https://github.com/CyberSecurity010110/kali-DragonKalilinuxFixall.git
+   cd DragonKalilinuxFixall
+
+   Install the required Python packages:
+
+bash
+
+pip install -r requirements.txt
+
+Run the main script:
+
+bash
+
+python main.py
