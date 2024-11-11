@@ -1,4 +1,4 @@
-# Dragon Kali Fix-All Tool
+# Dragon Kali Fix-All Tool (I'm currently updating this to be way more useful and comprehensive) 
 
 A comprehensive tool for automating common troubleshooting and maintenance tasks on Kali Linux with a user-friendly GUI.
 
