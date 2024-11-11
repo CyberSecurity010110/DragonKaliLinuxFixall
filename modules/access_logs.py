@@ -1,6 +1,6 @@
 import os
 import logging
-from flask import Flask, render_template_string
+from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
@@ -59,6 +59,19 @@ def view_log():
         ''', description=LOG_FILES[path], content=content)
     else:
         return "Log file not found", 404
+
+def access_log(log_path, progress_callback):
+    try:
+        print(f"Accessing log file: {log_path}")
+        progress_callback(50)
+        with open(log_path, 'r') as file:
+            content = file.read()
+        progress_callback(100)
+        print(f"Log file {log_path} accessed.")
+        return content
+    except Exception as e:
+        print(f"Error accessing log file: {e}")
+        return None
 
 if __name__ == '__main__':
     app.run(debug=True)
