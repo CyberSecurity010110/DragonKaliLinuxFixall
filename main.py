@@ -1,9 +1,7 @@
-# main.py
-
 import logging
 import tkinter as tk
-from modules import check_network, check_services, check_disk, log_cleanup, user_management, system_info, access_logs, check_firewall, check_network, customize_options, backup_restore
 from tkinter import ttk, simpledialog, messagebox
+from modules import check_network, check_services, check_disk, log_cleanup, user_management, system_info, access_logs, check_firewall, check_network, customize_options, backup_restore
 from modules.update_system import update_system
 from modules.check_network import check_network
 from modules.cleanup_system import cleanup_system
@@ -16,8 +14,19 @@ from modules.user_management import add_user, remove_user
 from modules.backup_restore import backup_directory, restore_directory
 from modules.access_logs import access_log
 from modules.customize_options import change_hostname, setup_static_ip, configure_ssh
+import subprocess
+import os
 
 logging.basicConfig(level=logging.DEBUG)
+
+def run_command(command):
+    """Run a shell command and return the output."""
+    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    logging.debug(f"Command: {command}")
+    logging.debug(f"Return code: {result.returncode}")
+    logging.debug(f"Output: {result.stdout.strip()}")
+    logging.debug(f"Error: {result.stderr.strip()}")
+    return result.returncode, result.stdout.strip(), result.stderr.strip()
 
 def run_check_network():
     """Run comprehensive network check and repair."""
@@ -27,65 +36,138 @@ def run_check_network():
     else:
         logging.error(f"Network issues detected: {message}")
 
+def fix_permissions(path, user, group, permissions):
+    """Fix permissions and ownership for a given path."""
+    try:
+        subprocess.run(['chown', f'{user}:{group}', path], check=True)
+        subprocess.run(['chmod', permissions, path], check=True)
+        logging.info(f"Fixed permissions for {path}")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Failed to fix permissions for {path}: {e}")
+
 def run_fix_permissions():
     """Fix file permissions and ownership."""
     logging.info("Fixing file permissions and ownership...")
-    # Implement logic to fix permissions and ownership
-    # ...
+    paths = {
+        '/path/to/file1': ('root', 'root', '644'),
+        '/path/to/file2': ('user', 'group', '755'),
+        # Add more paths and their expected permissions
+    }
+    for path, (user, group, permissions) in paths.items():
+        fix_permissions(path, user, group, permissions)
+
+def scan_and_fix_corruptions():
+    """Scan for file corruptions and attempt to fix them."""
+    try:
+        subprocess.run(['fsck', '-A', '-y'], check=True)
+        logging.info("File system check completed successfully.")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Failed to complete file system check: {e}")
 
 def run_scan_file_corruptions():
     """Scan for file corruptions and attempt to fix them."""
     logging.info("Scanning for file corruptions...")
-    # Implement logic to scan and fix file corruptions
-    # ...
+    scan_and_fix_corruptions()
+
+def fix_package_corruptions():
+    """Fix package corruptions."""
+    try:
+        subprocess.run(['dpkg', '--configure', '-a'], check=True)
+        subprocess.run(['apt-get', 'install', '-f'], check=True)
+        logging.info("Package corruption fix completed successfully.")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Failed to fix package corruptions: {e}")
 
 def run_fix_package_corruptions():
     """Fix package corruptions."""
     logging.info("Fixing package corruptions...")
-    # Implement logic to fix package corruptions
-    # ...
+    fix_package_corruptions()
 
 def run_smart_configuration():
     """Smart configuration for unconfigured packages."""
     logging.info("Performing smart configuration...")
-    # Implement logic for smart configuration
-    # ...
+    try:
+        subprocess.run(['dpkg-reconfigure', '-a'], check=True)
+        logging.info("Smart configuration completed successfully.")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Failed to complete smart configuration: {e}")
 
 def run_dependency_repair():
     """Repair dependency problems."""
     logging.info("Repairing dependency problems...")
-    # Implement logic to repair dependency problems
-    # ...
+    try:
+        subprocess.run(['apt-get', 'check'], check=True)
+        subprocess.run(['apt-get', 'install', '-f'], check=True)
+        logging.info("Dependency repair completed successfully.")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Failed to repair dependencies: {e}")
 
 def run_drive_management():
     """Manage drives (scan, mount, unmount)."""
     logging.info("Managing drives...")
-    # Implement logic to manage drives
-    # ...
+    # Example: Scan for drives
+    ret_code, output, error = run_command("lsblk")
+    if ret_code == 0:
+        logging.info(f"Drives:\n{output}")
+    else:
+        logging.error(f"Failed to list drives: {error}")
+
+    # Example: Mount a drive
+    # ret_code, output, error = run_command("mount /dev/sdX1 /mnt")
+    # if ret_code == 0:
+    #     logging.info("Drive mounted successfully.")
+    # else:
+    #     logging.error(f"Failed to mount drive: {error}")
+
+    # Example: Unmount a drive
+    # ret_code, output, error = run_command("umount /mnt")
+    # if ret_code == 0:
+    #     logging.info("Drive unmounted successfully.")
+    # else:
+    #     logging.error(f"Failed to unmount drive: {error}")
 
 def run_tweaks():
     """Apply system tweaks."""
     logging.info("Applying system tweaks...")
-    # Implement logic to apply system tweaks
-    # ...
+    # Example: Remove the need for sudo password
+    try:
+        with open('/etc/sudoers.d/nopasswd', 'w') as f:
+            f.write('%sudo ALL=(ALL) NOPASSWD:ALL\n')
+        logging.info("Removed the need for sudo password.")
+    except Exception as e:
+        logging.error(f"Failed to remove the need for sudo password: {e}")
+
+    # Example: Enable autologin
+    try:
+        with open('/etc/lightdm/lightdm.conf', 'a') as f:
+            f.write('[Seat:*]\nautologin-user=your_username\n')
+        logging.info("Enabled autologin.")
+    except Exception as e:
+        logging.error(f"Failed to enable autologin: {e}")
+
+    # Example: Adjust resolution
+    try:
+        ret_code, output, error = run_command("xrandr --output HDMI-1 --mode 1920x1080")
+        if ret_code == 0:
+            logging.info("Resolution adjusted successfully.")
+        else:
+            logging.error(f"Failed to adjust resolution: {error}")
+    except Exception as e:
+        logging.error(f"Failed to adjust resolution: {e}")
 
 def run_user_repair():
     """Repair user configurations and settings."""
     logging.info("Repairing user configurations and settings...")
-    # Implement logic to repair user configurations and settings
-    # ...
+    # Example: Fix user permissions
+    try:
+        subprocess.run(['chown', '-R', 'your_username:your_username', '/home/your_username'], check=True)
+        logging.info("User permissions fixed.")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Failed to fix user permissions: {e}")
 
-def main():
-    # Other task functions...
-    run_check_network()
-    run_fix_permissions()
-    run_scan_file_corruptions()
-    run_fix_package_corruptions()
-    run_smart_configuration()
-    run_dependency_repair()
-    run_drive_management()
-    run_tweaks()
-    run_user_repair()
+    # Example: Repair user settings
+    # Implement logic to repair user settings
+    # ...
 
 def run_task_with_progress(task, *args):
     progress_bar.start()
