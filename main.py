@@ -1,6 +1,8 @@
 # main.py
 
+import logging
 import tkinter as tk
+from modules import check_network
 from tkinter import ttk, simpledialog, messagebox
 from modules.update_system import update_system
 from modules.check_network import check_network
@@ -14,6 +16,14 @@ from modules.user_management import add_user, remove_user
 from modules.backup_restore import backup_directory, restore_directory
 from modules.access_logs import access_log
 from modules.customize_options import change_hostname, setup_static_ip, configure_ssh
+
+def run_check_network():
+    """Run comprehensive network check and repair."""
+    success, message = check_network.check_network()
+    if success:
+        logging.info("Network is functioning correctly.")
+    else:
+        logging.error(f"Network issues detected: {message}")
 
 def run_task_with_progress(task, *args):
     progress_bar.start()
