@@ -1,7 +1,6 @@
 import logging
 import tkinter as tk
 from tkinter import ttk, simpledialog, messagebox
-from modules import check_network, check_services, check_disk, log_cleanup, user_management, system_info, access_logs, check_firewall, check_network, customize_options, backup_restore
 from modules.update_system import update_system
 from modules.check_network import check_network
 from modules.cleanup_system import cleanup_system
@@ -30,7 +29,7 @@ def run_command(command):
 
 def run_check_network():
     """Run comprehensive network check and repair."""
-    success, message = check_network.check_network()
+    success, message = check_network()
     if success:
         logging.info("Network is functioning correctly.")
     else:
