@@ -2,7 +2,7 @@
 
 import logging
 import tkinter as tk
-from modules import check_network
+from modules import check_network, check_services, check_disk, log_cleanup, user_management, system_info, access_logs, check_firewall, check_network, customize_options, backup_restore
 from tkinter import ttk, simpledialog, messagebox
 from modules.update_system import update_system
 from modules.check_network import check_network
@@ -17,6 +17,8 @@ from modules.backup_restore import backup_directory, restore_directory
 from modules.access_logs import access_log
 from modules.customize_options import change_hostname, setup_static_ip, configure_ssh
 
+logging.basicConfig(level=logging.DEBUG)
+
 def run_check_network():
     """Run comprehensive network check and repair."""
     success, message = check_network.check_network()
@@ -24,6 +26,66 @@ def run_check_network():
         logging.info("Network is functioning correctly.")
     else:
         logging.error(f"Network issues detected: {message}")
+
+def run_fix_permissions():
+    """Fix file permissions and ownership."""
+    logging.info("Fixing file permissions and ownership...")
+    # Implement logic to fix permissions and ownership
+    # ...
+
+def run_scan_file_corruptions():
+    """Scan for file corruptions and attempt to fix them."""
+    logging.info("Scanning for file corruptions...")
+    # Implement logic to scan and fix file corruptions
+    # ...
+
+def run_fix_package_corruptions():
+    """Fix package corruptions."""
+    logging.info("Fixing package corruptions...")
+    # Implement logic to fix package corruptions
+    # ...
+
+def run_smart_configuration():
+    """Smart configuration for unconfigured packages."""
+    logging.info("Performing smart configuration...")
+    # Implement logic for smart configuration
+    # ...
+
+def run_dependency_repair():
+    """Repair dependency problems."""
+    logging.info("Repairing dependency problems...")
+    # Implement logic to repair dependency problems
+    # ...
+
+def run_drive_management():
+    """Manage drives (scan, mount, unmount)."""
+    logging.info("Managing drives...")
+    # Implement logic to manage drives
+    # ...
+
+def run_tweaks():
+    """Apply system tweaks."""
+    logging.info("Applying system tweaks...")
+    # Implement logic to apply system tweaks
+    # ...
+
+def run_user_repair():
+    """Repair user configurations and settings."""
+    logging.info("Repairing user configurations and settings...")
+    # Implement logic to repair user configurations and settings
+    # ...
+
+def main():
+    # Other task functions...
+    run_check_network()
+    run_fix_permissions()
+    run_scan_file_corruptions()
+    run_fix_package_corruptions()
+    run_smart_configuration()
+    run_dependency_repair()
+    run_drive_management()
+    run_tweaks()
+    run_user_repair()
 
 def run_task_with_progress(task, *args):
     progress_bar.start()
@@ -34,9 +96,6 @@ def run_task_with_progress(task, *args):
 
 def run_update_system():
     run_task_with_progress(update_system)
-
-def run_check_network():
-    run_task_with_progress(check_network)
 
 def run_cleanup_system():
     run_task_with_progress(cleanup_system)
