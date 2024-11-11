@@ -18,6 +18,22 @@ import os
 
 logging.basicConfig(level=logging.DEBUG)
 
+LOG_FILES = {
+    "/var/log/syslog": "System log",
+    "/var/log/auth.log": "Authentication log",
+    "/var/log/dmesg": "Kernel ring buffer",
+    "/var/log/kern.log": "Kernel log",
+    "/var/log/daemon.log": "Daemon log",
+    "/var/log/user.log": "User log",
+    "/var/log/Xorg.0.log": "Xorg log",
+    "/var/log/faillog": "Failed login attempts",
+    "/var/log/lastlog": "Last login log",
+    "/var/log/boot.log": "Boot log",
+    "/var/log/mysql/error.log": "MySQL error log",
+    "/var/log/apache2/error.log": "Apache error log",
+    "/var/log/apache2/access.log": "Apache access log",
+}
+
 def run_command(command):
     """Run a shell command and return the output."""
     result = subprocess.run(command, shell=True, capture_output=True, text=True)
