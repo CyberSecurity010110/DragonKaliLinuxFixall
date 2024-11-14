@@ -1,3 +1,9 @@
+# Note from the Author Jayson Rivers,
+# im currently working on a massive update to this
+# with 19 categories of more extensive repair/convenience 
+# options. It is much more comprehensive and will be open source
+# freely available right here, when its finished 
+
 # Dragon Kali Fix-All Tool
 
 A comprehensive tool for automating common troubleshooting and maintenance tasks on Kali Linux with a user-friendly GUI.
