@@ -5,7 +5,7 @@ Kali Linux Fix All is a comprehensive system maintenance and repair tool for Kal
 # Warning
 
 Although this tool is in a running state, it still requires thorough debugging. It is highly recommended to back up your Linux system using a tool such as Timeshift before attempting any repairs or modifications. This will ensure that you can restore your system in case anything goes wrong.
-I've put a lot of work into this and I will stll, It's my contribution to the open source community and and seemed to be missing a good thourough repair program. Still waiting on that cup of coffeee lol. Seriously though Backups First! Timeshift is a few minutes vs hours!
+I've put a lot of work into this and I will stll, It's my contribution to the open source community and and seemed to be missing a good thourough repair program. Still waiting on that cup of coffee lol. Seriously though Backups First! Timeshift is a few minutes vs hours!
 
 ## Features
 
