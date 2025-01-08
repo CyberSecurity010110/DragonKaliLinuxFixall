@@ -1,6 +1,0 @@
-tkinter
-os
-sys
-logging
-datetime
-subprocess
