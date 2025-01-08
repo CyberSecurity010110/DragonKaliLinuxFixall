@@ -49,4 +49,4 @@ Although this tool is in a running state, it still requires thorough debugging. 
 
 Run the application as root:
 ```sh
-sudo python3 main.py
+sudo python3 KaliLinuxFixall.py
