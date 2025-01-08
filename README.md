@@ -1,4 +1,52 @@
-# As Promised Here is the major update I promised but be warned, the interface works and most buttons, but it is not tested well. expect some 
-# things not to work yet, and others not work as expected. In testing I used every button and kali not load next time. Kali is very finicky with repairs
-# and as I have time Ill debug and test stuff, enhance stuff, and to it. So for now im adding the huge amount of modules I promised and urge to use backups
-# I reccomend Timeshift, its very easy and fast. removing published release to ensure its not too easy to use and breakyour system with.
+# Kali Linux Fix All
+
+Kali Linux Fix All is a comprehensive system maintenance and repair tool for Kali Linux systems.
+
+# Warning
+
+Although this tool is in a running state, it still requires thorough debugging. It is highly recommended to back up your Linux system using a tool such as Timeshift before attempting any repairs or modifications. This will ensure that you can restore your system in case anything goes wrong.
+
+## Features
+
+- Network Management
+- Package Management
+- User Management
+- Power Management
+- Kernel Management
+- NVIDIA GPU Management
+- System Logs
+- Partition Management
+- Mount Management
+- Shell Configuration
+- System File Check
+- Backup
+- Desktop Manager
+- Permission Manager
+- Services Management
+- Linux Headers
+- Flash Drive
+- Device Management
+- System Information
+- Tweaks
+
+## Requirements
+
+- Python 3.x
+
+## Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/CyberSecurity010110/DragonKalilinuxFixall.git
+    ```
+2. Navigate to the project directory and install dependencies:
+    ```sh
+    cd DragonKalilinuxFixall
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+Run the application as root:
+```sh
+sudo python3 main.py
