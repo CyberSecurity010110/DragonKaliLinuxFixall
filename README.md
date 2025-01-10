@@ -47,8 +47,8 @@ I've put a lot of work into this and I will stll, It's my contribution to the op
     ```
 
 ## Usage
+![Program Running](https://github.com/CyberSecurity010110/DragonKaliLinuxFixall/blob/main/image.png)
 
 Run the application as root:
 ```sh
 sudo python3 KaliLinuxFixall.py
-![Program Running](https://github.com/CyberSecurity010110/DragonKaliLinuxFixall/blob/main/image.png)
